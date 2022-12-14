@@ -7,8 +7,10 @@
 #include "GameFramework/Character.h"
 #include "WildernessCharacter.generated.h"
 
+class UCameraComponent;
 class UInputAction;
 class UInputMappingContext;
+class USpringArmComponent;
 
 UCLASS()
 class WILDERNESS_API AWildernessCharacter : public ACharacter
@@ -39,6 +41,22 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Input")
 	UInputAction* MovementAction;
 
-	void Move(const FInputActionValue& Value);
+	UPROPERTY(EditAnywhere, Category = "Input")
+	UInputAction* LookAction;
 
+	void Move(const FInputActionValue& Value);
+	void Look(const FInputActionValue& Value);
+
+private:
+	UPROPERTY(VisibleAnywhere)
+	USpringArmComponent* SpringArmComponent;
+
+	UPROPERTY(VisibleAnywhere)
+	UCameraComponent* CameraComponent;
+
+	UPROPERTY(VisibleAnywhere, Category = "Customization | Facial Features")
+	USkeletalMeshComponent* EyebrowComponent;
+
+	UPROPERTY(VisibleAnywhere, Category = "Customization | Facial Features")
+	USkeletalMeshComponent* BeardComponent;
 };
